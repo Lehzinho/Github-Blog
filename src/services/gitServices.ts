@@ -32,3 +32,11 @@ export const getRepoIssue = async (
     throw new Error(error.message);
   }
 };
+
+export const getRepo = async (user: string) => {
+  try {
+    return api.get(`/users/${user}/repos`);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
