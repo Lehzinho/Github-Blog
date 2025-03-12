@@ -1,21 +1,26 @@
-import GitImg from "@/assets/github.svg?react";
+import GitImg from "@/assets/link.svg?react";
 import * as S from "./_styles";
 import { NewInformation } from "./NewInformation";
+import { useContextSelector } from "use-context-selector";
+import { GitContextProviderContext } from "@/contexts/GitContext";
+import { Link } from "react-router-dom";
+
 export const UserInfo = () => {
+  const { avatar_url, name, bio, company, followers, login, html_url } =
+    useContextSelector(GitContextProviderContext, (context) => context.gitUser);
+
   return (
     <S.UserInfo>
-      <img src="https://avatars.githubusercontent.com/u/99737712?v=4" />
+      <img src={avatar_url} />
       <div>
         <div className="title">
-          <p>Cameron Williamson</p>
-          <GitImg />
+          <p>{name}</p>
+          <Link to={html_url} target="_blank">
+            github <GitImg />
+          </Link>
         </div>
-        <p>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </p>
-        <NewInformation />
+        <p>{bio}</p>
+        <NewInformation company={company} login={login} followers={followers} />
       </div>
     </S.UserInfo>
   );

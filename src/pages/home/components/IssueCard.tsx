@@ -1,15 +1,33 @@
+import { useNavigate } from "react-router-dom";
 import * as S from "./_styles";
-export const IssueCard = () => {
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
+interface IssueCardProps {
+  title: string;
+  body: string;
+  number: number;
+  created_at: string;
+}
+
+export const IssueCard = ({
+  body,
+  created_at,
+  number,
+  title,
+}: IssueCardProps) => {
+  const navigate = useNavigate();
   return (
-    <S.IssueCard to={"/"}>
+    <S.IssueCard onClick={() => navigate(`/post/${number}`)}>
       <div>
-        <p>JavaScript data types and data structures</p> <p>Há 1 dia</p>
+        <p>{title}</p>{" "}
+        <p>
+          {formatDistanceToNow(new Date(created_at), {
+            addSuffix: true,
+            locale: ptBR,
+          }).replace("cerca de ", "")}
+        </p>
       </div>
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in{" "}
-      </p>
+      <p>{body}</p>
     </S.IssueCard>
   );
 };

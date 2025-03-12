@@ -16,7 +16,18 @@ export const getIssues = async (
   q: string | undefined = ""
 ) => {
   try {
-    return api.get(`/search/issues?q=${q}repo:${user}/${repo}`);
+    return api.get(`/search/issues?q=${q} repo:${user}/${repo}`);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+export const getRepoIssue = async (
+  user: string,
+  repo: string,
+  number: string
+) => {
+  try {
+    return api.get(`/repos/${user}/${repo}/issues/${number}`);
   } catch (error: any) {
     throw new Error(error.message);
   }

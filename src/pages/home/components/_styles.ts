@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const UserInfo = styled.div`
@@ -27,6 +26,26 @@ export const UserInfo = styled.div`
     font-weight: 700;
     line-height: 130%;
     margin: 0.5rem 0;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: ${({ theme }) => theme.blue};
+
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 160%; /* 19.2px */
+      text-transform: uppercase;
+      &:visited {
+        color: ${({ theme }) => theme.blue};
+      }
+    }
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   img {
@@ -53,7 +72,7 @@ export const NewInformation = styled.div`
 
 export const Publicacoes = styled.div`
   width: 864px;
-  margin: 0 auto;
+  margin: 0 auto 100px;
   .cardContainer {
     display: flex;
     gap: 2rem;
@@ -62,7 +81,7 @@ export const Publicacoes = styled.div`
   }
 `;
 
-export const IssueCard = styled(Link)`
+export const IssueCard = styled.div`
   text-decoration: none;
   width: 416px;
   height: 260px;
@@ -70,6 +89,8 @@ export const IssueCard = styled(Link)`
   border-radius: 10px;
   padding: 32px;
   background: ${({ theme }) => theme["base-post"]};
+  border: none;
+  cursor: pointer;
   & > div {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -83,16 +104,20 @@ export const IssueCard = styled(Link)`
     }
     p:first-child {
       color: ${({ theme }) => theme["base-title"]};
-
+      text-align: start;
       font-size: 20px;
       font-weight: 700;
     }
   }
   & > p {
     width: 352px;
-    height: 112px;
-
+    height: auto;
+    text-align: start;
     color: ${({ theme }) => theme["base-text"]};
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }
